@@ -136,10 +136,14 @@ const Drills = () => {
               Back
             </Button>
             <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
-                <Mic className="w-4 h-4 text-primary-foreground" />
+              <div className="w-8 h-8 bg-gradient-hero rounded-xl flex items-center justify-center shadow-soft">
+                <img 
+                  src="/lovable-uploads/bddc0069-e260-4a0c-acb4-d88a9fff491a.png" 
+                  alt="Expresso Logo" 
+                  className="w-5 h-5"
+                />
               </div>
-              <h1 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+              <h1 className="text-2xl font-bold bg-gradient-hero bg-clip-text text-transparent">
                 Expresso
               </h1>
             </div>

@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
-import { Mic, Square, Play, Pause, RotateCcw } from "lucide-react";
+import { Mic, Square, Play, Pause, RotateCcw, TrendingUp } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 type RecordingState = 'idle' | 'recording' | 'stopped' | 'analyzing';
@@ -12,7 +12,7 @@ export const SpeechRecorder = () => {
   const [recordingState, setRecordingState] = useState<RecordingState>('idle');
   const [duration, setDuration] = useState(0);
   const [audioURL, setAudioURL] = useState<string | null>(null);
-  const [feedback, setFeedback] = useState<string | null>(null);
+  const [feedback, setFeedback] = useState<Array<{category: string, score: number, feedback: string}> | null>(null);
   const [analysisProgress, setAnalysisProgress] = useState(0);
   
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
@@ -88,22 +88,57 @@ export const SpeechRecorder = () => {
         if (prev >= 100) {
           clearInterval(interval);
           
-          // Simulate AI feedback
-          const feedbackOptions = [
-            "Great clarity! Your consonants are well-articulated. Try speaking 10% slower for even better precision.",
-            "Good volume control. Work on emphasizing key words more distinctly to improve engagement.",
-            "Excellent pacing! Your speech rhythm is natural. Consider adding more vocal variety for emphasis.",
-            "Clear pronunciation overall. Focus on completing word endings for maximum clarity.",
-            "Strong vocal projection! Try varying your tone more to keep listeners engaged."
-          ];
-          
-          const randomFeedback = feedbackOptions[Math.floor(Math.random() * feedbackOptions.length)];
-          setFeedback(randomFeedback);
+          // Generate detailed AI feedback with multiple categories
+          const generateDetailedFeedback = () => {
+            const feedbackCategories = {
+              clarity: [
+                { score: 85, feedback: "Your consonants are well-articulated, particularly your 'T' and 'K' sounds." },
+                { score: 78, feedback: "Some vowel sounds could be more distinct, especially 'E' and 'I' sounds." },
+                { score: 92, feedback: "Excellent enunciation - every word is clearly understood." },
+                { score: 73, feedback: "Your speech clarity is good but could benefit from slower pacing." }
+              ],
+              voice: [
+                { score: 88, feedback: "Strong vocal projection with good breath support throughout." },
+                { score: 82, feedback: "Your tone is warm and engaging, perfect for presentations." },
+                { score: 75, feedback: "Consider adding more vocal variety to maintain listener interest." },
+                { score: 90, feedback: "Excellent voice control with consistent volume and pace." }
+              ],
+              pace: [
+                { score: 76, feedback: "You're speaking a bit fast - try slowing down by 15% for better comprehension." },
+                { score: 87, feedback: "Great pacing with natural pauses between thoughts." },
+                { score: 84, feedback: "Good rhythm overall, but add more strategic pauses for emphasis." },
+                { score: 91, feedback: "Perfect speaking pace - easy to follow and engaging." }
+              ],
+              structure: [
+                { score: 89, feedback: "Clear logical flow with smooth transitions between ideas." },
+                { score: 83, feedback: "Good organization, but consider stronger opening and closing statements." },
+                { score: 77, feedback: "Your main points are clear but could use better supporting examples." },
+                { score: 94, feedback: "Excellent structure with compelling introduction and strong conclusion." }
+              ],
+              engagement: [
+                { score: 81, feedback: "Your enthusiasm comes through, but try varying your energy levels more." },
+                { score: 93, feedback: "Highly engaging delivery with perfect use of emphasis and inflection." },
+                { score: 79, feedback: "Good energy overall - consider adding more vocal expressions for key points." },
+                { score: 86, feedback: "Natural conversational style that keeps listeners interested." }
+              ]
+            };
+
+            // Randomly select one feedback from each category
+            const selectedFeedback = Object.entries(feedbackCategories).map(([category, options]) => {
+              const selected = options[Math.floor(Math.random() * options.length)];
+              return { category, ...selected };
+            });
+
+            return selectedFeedback;
+          };
+
+          const detailedFeedback = generateDetailedFeedback();
+          setFeedback(detailedFeedback);
           setRecordingState('stopped');
           
           toast({
             title: "Analysis complete",
-            description: "Your AI feedback is ready!",
+            description: "Your detailed AI feedback is ready!",
           });
           
           return 100;
@@ -158,7 +193,7 @@ export const SpeechRecorder = () => {
               className={`w-24 h-24 rounded-full text-xl ${
                 recordingState === 'recording' 
                   ? 'animate-pulse-record' 
-                  : 'bg-gradient-primary hover:opacity-90'
+                  : 'bg-gradient-hero hover:opacity-90'
               }`}
               onClick={recordingState === 'recording' ? stopRecording : startRecording}
               disabled={recordingState === 'analyzing'}
@@ -223,7 +258,7 @@ export const SpeechRecorder = () => {
         <div className="flex justify-center space-x-3">
           <Button
             onClick={analyzeRecording}
-            className="bg-gradient-primary hover:opacity-90"
+            className="bg-gradient-hero hover:opacity-90"
           >
             Analyze Speech
           </Button>
@@ -241,14 +276,52 @@ export const SpeechRecorder = () => {
       {feedback && (
         <Card className="bg-gradient-to-br from-success/10 to-success/5 border-success/20">
           <CardContent className="p-6">
-            <div className="space-y-3">
-              <div className="flex items-center space-x-2">
+            <div className="space-y-4">
+              <div className="flex items-center space-x-2 mb-4">
                 <div className="w-8 h-8 bg-success rounded-full flex items-center justify-center">
-                  <Mic className="w-4 h-4 text-success-foreground" />
+                  <TrendingUp className="w-4 h-4 text-success-foreground" />
                 </div>
-                <h4 className="font-semibold text-success">AI Feedback</h4>
+                <h4 className="font-semibold text-success">Detailed AI Analysis</h4>
               </div>
-              <p className="text-foreground leading-relaxed">{feedback}</p>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {feedback.map((item, index) => (
+                  <div key={index} className="bg-card/50 rounded-lg p-4 space-y-2">
+                    <div className="flex items-center justify-between">
+                      <h5 className="font-medium text-foreground capitalize">{item.category}</h5>
+                      <div className="flex items-center space-x-2">
+                        <div className="text-sm text-muted-foreground">{item.score}/100</div>
+                        <div className="w-12 bg-muted rounded-full h-2">
+                          <div 
+                            className={`h-2 rounded-full transition-all duration-500 ${
+                              item.score >= 85 ? 'bg-success' : 
+                              item.score >= 70 ? 'bg-accent' : 'bg-destructive'
+                            }`}
+                            style={{ width: `${item.score}%` }}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <p className="text-sm text-foreground leading-relaxed">{item.feedback}</p>
+                  </div>
+                ))}
+              </div>
+              
+              <div className="mt-4 p-4 bg-primary/10 rounded-lg">
+                <div className="flex items-center space-x-2 mb-2">
+                  <TrendingUp className="w-4 h-4 text-primary" />
+                  <span className="font-medium text-primary">Overall Score</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-2xl font-bold text-foreground">
+                    {Math.round(feedback.reduce((acc, item) => acc + item.score, 0) / feedback.length)}/100
+                  </span>
+                  <span className="text-sm text-muted-foreground">
+                    {feedback.reduce((acc, item) => acc + item.score, 0) / feedback.length >= 85 ? 'Excellent!' : 
+                     feedback.reduce((acc, item) => acc + item.score, 0) / feedback.length >= 70 ? 'Good job!' : 'Keep practicing!'}
+                  </span>
+                </div>
+              </div>
             </div>
           </CardContent>
         </Card>

@@ -42,10 +42,14 @@ const Index = () => {
       <header className="border-b bg-card/50 backdrop-blur-sm sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
-              <Mic className="w-4 h-4 text-primary-foreground" />
+            <div className="w-10 h-10 bg-gradient-hero rounded-xl flex items-center justify-center shadow-soft">
+              <img 
+                src="/lovable-uploads/bddc0069-e260-4a0c-acb4-d88a9fff491a.png" 
+                alt="Expresso Logo" 
+                className="w-6 h-6"
+              />
             </div>
-            <h1 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+            <h1 className="text-2xl font-bold bg-gradient-hero bg-clip-text text-transparent">
               Expresso
             </h1>
           </div>
@@ -66,7 +70,7 @@ const Index = () => {
           <div className="space-y-4">
             <h2 className="text-4xl md:text-5xl font-bold text-foreground">
               Perfect Your Speaking Skills with
-              <span className="block bg-gradient-primary bg-clip-text text-transparent">
+              <span className="block bg-gradient-hero bg-clip-text text-transparent">
                 AI-Powered Coaching
               </span>
             </h2>
@@ -129,9 +133,17 @@ const Index = () => {
             <Button 
               onClick={() => navigate('/drills')}
               size="lg"
-              className="bg-gradient-primary hover:opacity-90 transition-opacity"
+              className="bg-gradient-hero hover:opacity-90 transition-opacity mr-4"
             >
               Explore All Drills
+            </Button>
+            <Button 
+              onClick={() => navigate('/training-plans')}
+              size="lg"
+              variant="outline"
+              className="hover:bg-primary hover:text-primary-foreground transition-colors"
+            >
+              Training Plans
             </Button>
           </div>
         </section>

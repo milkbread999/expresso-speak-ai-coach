@@ -43,7 +43,8 @@ export default {
 				},
 				accent: {
 					DEFAULT: 'hsl(var(--accent))',
-					foreground: 'hsl(var(--accent-foreground))'
+					foreground: 'hsl(var(--accent-foreground))',
+					glow: 'hsl(var(--accent-glow))'
 				},
 				success: {
 					DEFAULT: 'hsl(var(--success))',
@@ -119,7 +120,8 @@ export default {
 			},
 			backgroundImage: {
 				'gradient-primary': 'var(--gradient-primary)',
-				'gradient-accent': 'var(--gradient-accent)'
+				'gradient-accent': 'var(--gradient-accent)',
+				'gradient-hero': 'var(--gradient-hero)'
 			},
 			boxShadow: {
 				'soft': 'var(--shadow-soft)',
