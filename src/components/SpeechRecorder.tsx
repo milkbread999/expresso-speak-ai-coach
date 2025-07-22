@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
-import { Mic, Square, Play, Pause, RotateCcw, TrendingUp } from "lucide-react";
+import { Mic, Square, Play, RotateCcw, TrendingUp } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 type RecordingState = 'idle' | 'recording' | 'stopped' | 'analyzing';
@@ -12,9 +12,10 @@ export const SpeechRecorder = () => {
   const [recordingState, setRecordingState] = useState<RecordingState>('idle');
   const [duration, setDuration] = useState(0);
   const [audioURL, setAudioURL] = useState<string | null>(null);
-  const [feedback, setFeedback] = useState<Array<{category: string, score: number, feedback: string}> | null>(null);
+  const [feedback, setFeedback] = useState<Array<{ category: string, score: number, feedback: string }> | null>(null);
   const [analysisProgress, setAnalysisProgress] = useState(0);
-  
+  const [transcript, setTranscript] = useState<string | null>(null);
+
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const { toast } = useToast();
@@ -26,7 +27,6 @@ export const SpeechRecorder = () => {
       mediaRecorderRef.current = mediaRecorder;
 
       const chunks: BlobPart[] = [];
-      
       mediaRecorder.ondataavailable = (event) => {
         chunks.push(event.data);
       };
@@ -41,8 +41,7 @@ export const SpeechRecorder = () => {
       mediaRecorder.start();
       setRecordingState('recording');
       setDuration(0);
-      
-      // Start timer
+
       timerRef.current = setInterval(() => {
         setDuration(prev => prev + 1);
       }, 1000);
@@ -64,10 +63,7 @@ export const SpeechRecorder = () => {
     if (mediaRecorderRef.current && recordingState === 'recording') {
       mediaRecorderRef.current.stop();
       setRecordingState('stopped');
-      
-      if (timerRef.current) {
-        clearInterval(timerRef.current);
-      }
+      if (timerRef.current) clearInterval(timerRef.current);
 
       toast({
         title: "Recording stopped",
@@ -79,73 +75,49 @@ export const SpeechRecorder = () => {
   const analyzeRecording = async () => {
     if (!audioURL) return;
 
-    setRecordingState('analyzing');
+    setRecordingState("analyzing");
     setAnalysisProgress(0);
 
-    // Simulate AI analysis with progress
-    const interval = setInterval(() => {
-      setAnalysisProgress(prev => {
-        if (prev >= 100) {
-          clearInterval(interval);
-          
-          // Generate detailed AI feedback with multiple categories
-          const generateDetailedFeedback = () => {
-            const feedbackCategories = {
-              clarity: [
-                { score: 85, feedback: "Your consonants are well-articulated, particularly your 'T' and 'K' sounds." },
-                { score: 78, feedback: "Some vowel sounds could be more distinct, especially 'E' and 'I' sounds." },
-                { score: 92, feedback: "Excellent enunciation - every word is clearly understood." },
-                { score: 73, feedback: "Your speech clarity is good but could benefit from slower pacing." }
-              ],
-              voice: [
-                { score: 88, feedback: "Strong vocal projection with good breath support throughout." },
-                { score: 82, feedback: "Your tone is warm and engaging, perfect for presentations." },
-                { score: 75, feedback: "Consider adding more vocal variety to maintain listener interest." },
-                { score: 90, feedback: "Excellent voice control with consistent volume and pace." }
-              ],
-              pace: [
-                { score: 76, feedback: "You're speaking a bit fast - try slowing down by 15% for better comprehension." },
-                { score: 87, feedback: "Great pacing with natural pauses between thoughts." },
-                { score: 84, feedback: "Good rhythm overall, but add more strategic pauses for emphasis." },
-                { score: 91, feedback: "Perfect speaking pace - easy to follow and engaging." }
-              ],
-              structure: [
-                { score: 89, feedback: "Clear logical flow with smooth transitions between ideas." },
-                { score: 83, feedback: "Good organization, but consider stronger opening and closing statements." },
-                { score: 77, feedback: "Your main points are clear but could use better supporting examples." },
-                { score: 94, feedback: "Excellent structure with compelling introduction and strong conclusion." }
-              ],
-              engagement: [
-                { score: 81, feedback: "Your enthusiasm comes through, but try varying your energy levels more." },
-                { score: 93, feedback: "Highly engaging delivery with perfect use of emphasis and inflection." },
-                { score: 79, feedback: "Good energy overall - consider adding more vocal expressions for key points." },
-                { score: 86, feedback: "Natural conversational style that keeps listeners interested." }
-              ]
-            };
+    const blob = await fetch(audioURL).then((res) => res.blob());
+    const formData = new FormData();
+    formData.append("audio", blob, "recording.wav");
 
-            // Randomly select one feedback from each category
-            const selectedFeedback = Object.entries(feedbackCategories).map(([category, options]) => {
-              const selected = options[Math.floor(Math.random() * options.length)];
-              return { category, ...selected };
-            });
-
-            return selectedFeedback;
-          };
-
-          const detailedFeedback = generateDetailedFeedback();
-          setFeedback(detailedFeedback);
-          setRecordingState('stopped');
-          
-          toast({
-            title: "Analysis complete",
-            description: "Your detailed AI feedback is ready!",
-          });
-          
-          return 100;
-        }
-        return prev + 10;
+    try {
+      // Transcription
+      const transcriptionRes = await fetch("http://localhost:5000/api/speech-to-text-whisper", {
+        method: "POST",
+        body: formData,
       });
-    }, 200);
+
+      const { transcription } = await transcriptionRes.json();
+      setTranscript(transcription);
+
+      // Analysis
+      const analysisRes = await fetch("http://localhost:5000/api/analyze-transcription", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ transcription }),
+      });
+
+      const { analysis } = await analysisRes.json();
+      console.log("Received analysis:", analysis);
+      const parsedFeedback = analysis; // assuming backend returns a JSON string
+      setFeedback(parsedFeedback);
+      setRecordingState("stopped");
+
+      toast({
+        title: "Analysis complete",
+        description: "Your detailed AI feedback and transcript are ready!",
+      });
+    } catch (error) {
+      console.error("Analysis failed:", error);
+      toast({
+        title: "Analysis failed",
+        description: "Please try again",
+        variant: "destructive",
+      });
+      setRecordingState("stopped");
+    }
   };
 
   const resetRecording = () => {
@@ -153,11 +125,9 @@ export const SpeechRecorder = () => {
     setDuration(0);
     setAudioURL(null);
     setFeedback(null);
+    setTranscript(null);
     setAnalysisProgress(0);
-    
-    if (timerRef.current) {
-      clearInterval(timerRef.current);
-    }
+    if (timerRef.current) clearInterval(timerRef.current);
   };
 
   const formatTime = (seconds: number) => {
@@ -168,14 +138,10 @@ export const SpeechRecorder = () => {
 
   const getRecordingStateDisplay = () => {
     switch (recordingState) {
-      case 'recording':
-        return { text: 'Recording...', color: 'destructive' };
-      case 'stopped':
-        return { text: 'Ready to analyze', color: 'default' };
-      case 'analyzing':
-        return { text: 'Analyzing...', color: 'default' };
-      default:
-        return { text: 'Ready to record', color: 'secondary' };
+      case 'recording': return { text: 'Recording...', color: 'destructive' };
+      case 'stopped': return { text: 'Ready to analyze', color: 'default' };
+      case 'analyzing': return { text: 'Analyzing...', color: 'default' };
+      default: return { text: 'Ready to record', color: 'secondary' };
     }
   };
 
@@ -190,21 +156,12 @@ export const SpeechRecorder = () => {
             <Button
               size="lg"
               variant={recordingState === 'recording' ? 'destructive' : 'default'}
-              className={`w-24 h-24 rounded-full text-xl ${
-                recordingState === 'recording' 
-                  ? 'animate-pulse-record' 
-                  : 'bg-gradient-hero hover:opacity-90'
-              }`}
+              className={`w-24 h-24 rounded-full text-xl ${recordingState === 'recording' ? 'animate-pulse-record' : 'bg-gradient-hero hover:opacity-90'}`}
               onClick={recordingState === 'recording' ? stopRecording : startRecording}
               disabled={recordingState === 'analyzing'}
             >
-              {recordingState === 'recording' ? (
-                <Square className="w-8 h-8" />
-              ) : (
-                <Mic className="w-8 h-8" />
-              )}
+              {recordingState === 'recording' ? <Square className="w-8 h-8" /> : <Mic className="w-8 h-8" />}
             </Button>
-            
             {recordingState === 'recording' && (
               <div className="absolute -right-2 -top-2">
                 <div className="w-6 h-6 bg-destructive rounded-full flex items-center justify-center animate-pulse">
@@ -214,7 +171,6 @@ export const SpeechRecorder = () => {
             )}
           </div>
         </div>
-
         <div className="space-y-2">
           <Badge variant={stateDisplay.color as any} className="text-sm">
             {stateDisplay.text}
@@ -254,26 +210,44 @@ export const SpeechRecorder = () => {
       )}
 
       {/* Action Buttons */}
-      {recordingState === 'stopped' && (
+      {recordingState === 'stopped' && !feedback && (
         <div className="flex justify-center space-x-3">
-          <Button
-            onClick={analyzeRecording}
-            className="bg-gradient-hero hover:opacity-90"
-          >
+          <Button onClick={analyzeRecording} className="bg-gradient-hero hover:opacity-90">
             Analyze Speech
           </Button>
-          <Button
-            variant="outline"
-            onClick={resetRecording}
-          >
+          <Button variant="outline" onClick={resetRecording}>
             <RotateCcw className="w-4 h-4 mr-2" />
             Reset
           </Button>
         </div>
       )}
 
+      {/* Transcript */}
+      {transcript && (
+        <Card className="bg-muted/50">
+          <CardContent className="p-4 space-y-2">
+            <h4 className="text-lg font-semibold text-foreground">Transcript</h4>
+            <p className="text-sm text-muted-foreground whitespace-pre-wrap">{transcript}</p>
+          </CardContent>
+        </Card>
+      )}
+
       {/* AI Feedback */}
+
       {feedback && (
+  <Card className="bg-muted/50">
+    <CardContent className="p-4">
+      <h4 className="text-lg font-semibold text-foreground mb-2">AI Feedback</h4>
+      <pre className="whitespace-pre-wrap text-sm text-muted-foreground">
+        {typeof feedback === 'string' ? feedback : JSON.stringify(feedback, null, 2)}
+      </pre>
+    </CardContent>
+  </Card>
+)}
+
+
+
+      {/* {feedback && (
         <Card className="bg-gradient-to-br from-success/10 to-success/5 border-success/20">
           <CardContent className="p-6">
             <div className="space-y-4">
@@ -283,7 +257,6 @@ export const SpeechRecorder = () => {
                 </div>
                 <h4 className="font-semibold text-success">Detailed AI Analysis</h4>
               </div>
-              
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {feedback.map((item, index) => (
                   <div key={index} className="bg-card/50 rounded-lg p-4 space-y-2">
@@ -292,11 +265,13 @@ export const SpeechRecorder = () => {
                       <div className="flex items-center space-x-2">
                         <div className="text-sm text-muted-foreground">{item.score}/100</div>
                         <div className="w-12 bg-muted rounded-full h-2">
-                          <div 
-                            className={`h-2 rounded-full transition-all duration-500 ${
-                              item.score >= 85 ? 'bg-success' : 
-                              item.score >= 70 ? 'bg-accent' : 'bg-destructive'
-                            }`}
+                          <div
+                            className={`h-2 rounded-full transition-all duration-500 ${item.score >= 85
+                                ? 'bg-success'
+                                : item.score >= 70
+                                  ? 'bg-accent'
+                                  : 'bg-destructive'
+                              }`}
                             style={{ width: `${item.score}%` }}
                           />
                         </div>
@@ -306,7 +281,6 @@ export const SpeechRecorder = () => {
                   </div>
                 ))}
               </div>
-              
               <div className="mt-4 p-4 bg-primary/10 rounded-lg">
                 <div className="flex items-center space-x-2 mb-2">
                   <TrendingUp className="w-4 h-4 text-primary" />
@@ -317,15 +291,17 @@ export const SpeechRecorder = () => {
                     {Math.round(feedback.reduce((acc, item) => acc + item.score, 0) / feedback.length)}/100
                   </span>
                   <span className="text-sm text-muted-foreground">
-                    {feedback.reduce((acc, item) => acc + item.score, 0) / feedback.length >= 85 ? 'Excellent!' : 
-                     feedback.reduce((acc, item) => acc + item.score, 0) / feedback.length >= 70 ? 'Good job!' : 'Keep practicing!'}
+                    {(() => {
+                      const avg = feedback.reduce((acc, item) => acc + item.score, 0) / feedback.length;
+                      return avg >= 85 ? 'Excellent!' : avg >= 70 ? 'Good job!' : 'Keep practicing!';
+                    })()}
                   </span>
                 </div>
               </div>
             </div>
           </CardContent>
         </Card>
-      )}
+      )} */}
     </div>
   );
 };
