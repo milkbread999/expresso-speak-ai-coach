@@ -34,7 +34,9 @@ const drillsData = {
       "Repeat the exercise 3 times, then remove the pen and read normally",
       "Notice the improved clarity in your regular speech"
     ],
-    practiceText: "The quick brown fox jumps over the lazy dog. Red leather, yellow leather. Unique New York. How much wood would a woodchuck chuck if a woodchuck could chuck wood?",
+    practiceText: "There are plenty of reasons to learn a foreign language before you travel. Perhaps you’re venturing beyond major tourist centers, or you want to be prepared for emergencies. Whatever the reason, speaking even a few words of the local language with residents can quickly elevate you from mere tourist to sympathetic traveler."
+
+,
     tips: [
       "Start slowly and gradually increase your speed",
       "Don't bite down too hard on the pen - gentle pressure is enough",
@@ -45,7 +47,7 @@ const drillsData = {
       "Improves consonant articulation",
       "Enhances speech clarity",
       "Strengthens oral muscles",
-      "Increases awareness of mouth positioning"
+      "Helps control speed"
     ]
   },
   2: {
@@ -72,7 +74,7 @@ const drillsData = {
     ],
     benefits: [
       "Develops muscle memory for clear speech",
-      "Improves consonant precision",
+      "Improves enunciation and clarity",
       "Enhances vocal projection",
       "Builds confidence in pronunciation"
     ]
@@ -86,13 +88,13 @@ const drillsData = {
     tags: ["Speed", "Pronunciation"],
     category: "Pronunciation",
     instructions: [
-      "Start with the easier tongue twisters and say them slowly",
+      "Start slow!",
       "Gradually increase speed while maintaining accuracy",
       "If you make a mistake, slow down and start again",
       "Practice each twister 5 times before moving to the next",
       "Focus on precision over speed initially"
     ],
-    practiceText: "She sells seashells by the seashore. How can a clam cram in a clean cream can? I scream, you scream, we all scream for ice cream. Red lorry, yellow lorry.",
+    practiceText: "She sells seashells by the seashore. How can a clam cram in a clean cream can? I scream, you scream, we all scream for ice cream. Red leather, yellow leather. Six sick hicks nick six slick bricks with picks and sticks. Unique New York. You know you need unique New York.",
     tips: [
       "Accuracy first, speed second",
       "Break down difficult sound combinations",
