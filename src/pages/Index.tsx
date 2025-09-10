@@ -44,7 +44,7 @@ const Index = () => {
           <div className="flex items-center space-x-2">
             <div className="w-10 h-10 bg-gradient-hero rounded-xl flex items-center justify-center shadow-soft">
               <img 
-                src="/lovable-uploads/bddc0069-e260-4a0c-acb4-d88a9fff491a.png" 
+                src="expressologo.png" 
                 alt="Expresso Logo" 
                 className="w-6 h-6"
               />
@@ -68,16 +68,10 @@ const Index = () => {
         {/* Hero Section */}
         <section className="text-center space-y-6">
           <div className="space-y-4">
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground">
-              Perfect Your Speaking Skills with
-              <span className="block bg-gradient-hero bg-clip-text text-transparent">
-                AI-Powered Coaching
-              </span>
+            <h2 className="text-5xl md:text-6xl font-bold text-foreground block bg-gradient-hero bg-clip-text text-transparent">Expresso</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground">
+              Public speaking coaching made for you.
             </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Record your voice, get instant AI feedback, and master speaking drills 
-              designed by speech professionals.
-            </p>
           </div>
 
           {/* Quick Stats */}
@@ -87,12 +81,12 @@ const Index = () => {
               <span>15+ Drills</span>
             </div>
             <div className="flex items-center space-x-2">
-              <TrendingUp className="w-4 h-4 text-success" />
-              <span>Instant Feedback</span>
-            </div>
-            <div className="flex items-center space-x-2">
               <Mic className="w-4 h-4 text-accent" />
               <span>AI Analysis</span>
+            </div>
+            <div className="flex items-center space-x-2">
+              <BookOpen className="w-4 h-4 text-primary" />
+              <span>Blog + Live Coaching</span>
             </div>
           </div>
         </section>

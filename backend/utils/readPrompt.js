@@ -1,19 +1,13 @@
 const fs = require('fs');
 const path = require('path');
 
-/**
- * Reads the OpenAI prompt from a specified file in the configuration folder.
- * @param {string} promptFileName - The name of the prompt file.
- * @returns {Promise<string>} The content of the prompt file.
- */
-async function readPrompt(promptFileName) {
+function readPrompt(filename) {
   try {
-    const filePath = path.join(__dirname, '../config', promptFileName);
-    const data = await fs.promises.readFile(filePath, 'utf8');
-    return data;
+    const promptPath = path.join(__dirname, '..', 'prompts', filename);
+    return fs.readFileSync(promptPath, 'utf8');
   } catch (error) {
-    console.error(`Error reading prompt file (${promptFileName}):`, error);
-    throw new Error('Failed to read the prompt file');
+    console.error(`Error reading prompt file ${filename}:`, error.message);
+    throw new Error(`Could not read prompt file: ${filename}`);
   }
 }
 

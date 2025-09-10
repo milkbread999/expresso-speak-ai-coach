@@ -138,7 +138,7 @@ const Drills = () => {
             <div className="flex items-center space-x-2">
               <div className="w-8 h-8 bg-gradient-hero rounded-xl flex items-center justify-center shadow-soft">
                 <img 
-                  src="/lovable-uploads/bddc0069-e260-4a0c-acb4-d88a9fff491a.png" 
+                  src="expressologo.png" 
                   alt="Expresso Logo" 
                   className="w-5 h-5"
                 />
