@@ -51,37 +51,6 @@ const trainingPlans: TrainingPlan[] = [
     ]
   },
   {
-    id: 2,
-    title: "Professional Speaker",
-    description: "Advanced techniques for presentations, meetings, and public speaking",
-    duration: "6 weeks",
-    level: "Advanced",
-    totalDrills: 18,
-    completedDrills: 0,
-    category: "Professional",
-    goals: ["Master presentations", "Enhance leadership voice", "Perfect delivery"],
-    drills: [
-      { id: 1, title: "Executive Presence", duration: "12 min", completed: false, week: 1 },
-      { id: 2, title: "Advanced Articulation", duration: "10 min", completed: false, week: 1 },
-      { id: 3, title: "Persuasive Speaking", duration: "15 min", completed: false, week: 1 },
-      { id: 4, title: "Voice Modulation", duration: "12 min", completed: false, week: 2 },
-      { id: 5, title: "Stress Patterns", duration: "10 min", completed: false, week: 2 },
-      { id: 6, title: "Meeting Leadership", duration: "15 min", completed: false, week: 2 },
-      { id: 7, title: "Impromptu Speaking", duration: "12 min", completed: false, week: 3 },
-      { id: 8, title: "Q&A Mastery", duration: "15 min", completed: false, week: 3 },
-      { id: 9, title: "Storytelling Techniques", duration: "18 min", completed: false, week: 3 },
-      { id: 10, title: "Advanced Presentation", duration: "20 min", completed: false, week: 4 },
-      { id: 11, title: "Media Interviews", duration: "15 min", completed: false, week: 4 },
-      { id: 12, title: "Crisis Communication", duration: "12 min", completed: false, week: 4 },
-      { id: 13, title: "International Speaking", duration: "15 min", completed: false, week: 5 },
-      { id: 14, title: "Virtual Presentations", duration: "12 min", completed: false, week: 5 },
-      { id: 15, title: "Audience Engagement", duration: "18 min", completed: false, week: 5 },
-      { id: 16, title: "Final Presentation", duration: "25 min", completed: false, week: 6 },
-      { id: 17, title: "Peer Review", duration: "15 min", completed: false, week: 6 },
-      { id: 18, title: "Certification", duration: "20 min", completed: false, week: 6 },
-    ]
-  },
-  {
     id: 3,
     title: "Accent Refinement",
     description: "Reduce accent interference and enhance pronunciation clarity",
@@ -312,7 +281,7 @@ const TrainingPlans = () => {
         <div className="text-center space-y-4 mb-12">
           <h2 className="text-4xl font-bold text-foreground">Training Plans</h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Follow structured programs designed by speech experts to achieve your speaking goals
+            Follow structured programs designed by experienced speakers
           </p>
         </div>
 
@@ -391,28 +360,6 @@ const TrainingPlans = () => {
               </CardContent>
             </Card>
           ))}
-        </div>
-
-        {/* Feature callout */}
-        <div className="mt-16 text-center">
-          <Card className="max-w-2xl mx-auto shadow-soft border-0 bg-gradient-to-br from-primary/5 to-accent/5">
-            <CardContent className="p-8">
-              <div className="space-y-4">
-                <div className="w-16 h-16 bg-gradient-hero rounded-full flex items-center justify-center mx-auto">
-                  <Trophy className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-2xl font-bold text-foreground">Custom Plans Coming Soon</h3>
-                <p className="text-muted-foreground">
-                  Get personalized training plans based on your unique speech patterns and goals. 
-                  Our AI will analyze your recordings and create a tailored program just for you.
-                </p>
-                <Button disabled variant="outline">
-                  <Star className="w-4 h-4 mr-2" />
-                  Join Waitlist
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
         </div>
       </main>
     </div>

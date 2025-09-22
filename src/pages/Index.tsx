@@ -91,6 +91,18 @@ const Index = () => {
           </div>
         </section>
 
+
+        <div className="text-center">
+            <Button 
+              onClick={() => navigate('/drills')}
+              size="lg"
+              className="bg-gradient-hero hover:opacity-90 transition-opacity mr-4"
+            >
+              Try Free 1:1 Coaching
+            </Button>
+          </div>
+
+
         {/* Speech Recorder Section */}
         <section className="max-w-2xl mx-auto">
           <Card className="shadow-medium border-0 bg-gradient-to-br from-card to-card/80">

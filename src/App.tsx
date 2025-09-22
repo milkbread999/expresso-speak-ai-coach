@@ -31,9 +31,15 @@ const App = () => (
           />
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/log-in" element={<LogIn />} />
-          <Route path="/drills" element={<Drills />} />
-          <Route path="/training-plans" element={<TrainingPlans />} />
-          <Route path="/drill/:id" element={<DrillDetail />} />
+          <Route path="/drills" element={              <ProtectedRoute>
+                <Drills />
+              </ProtectedRoute>} />
+          <Route path="/training-plans" element={              <ProtectedRoute>
+                <TrainingPlans />
+              </ProtectedRoute>} />
+          <Route path="/drill/:id" element={              <ProtectedRoute>
+                <DrillDetail />
+              </ProtectedRoute>} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
