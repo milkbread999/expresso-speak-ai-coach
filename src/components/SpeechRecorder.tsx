@@ -162,7 +162,16 @@ export const SpeechRecorder = () => {
       try {
         // Try to parse if it's a JSON string
         if (typeof analysis === 'string') {
-          parsedFeedback = JSON.parse(analysis);
+          // First, try to extract JSON from the response if it's wrapped in text
+          let jsonString = analysis.trim();
+          
+          // Look for JSON array pattern
+          const jsonMatch = jsonString.match(/\[[\s\S]*\]/);
+          if (jsonMatch) {
+            jsonString = jsonMatch[0];
+          }
+          
+          parsedFeedback = JSON.parse(jsonString);
         } else {
           // If it's already an object, use it directly
           parsedFeedback = analysis;
@@ -176,7 +185,17 @@ export const SpeechRecorder = () => {
       } catch (parseError) {
         console.error("JSON parse error:", parseError);
         console.log("Raw analysis data:", analysis);
-        throw new Error(`Invalid analysis format: ${parseError.message}`);
+        
+        // Create a fallback response if JSON parsing fails
+        parsedFeedback = [
+          {
+            category: "Analysis Error",
+            score: 0,
+            feedback: "The AI analysis returned an unexpected format. Please try recording again. Raw response: " + analysis.substring(0, 100) + "..."
+          }
+        ];
+        
+        console.log("Using fallback feedback:", parsedFeedback);
       }
       
       setFeedback(parsedFeedback);
@@ -369,6 +388,41 @@ export const SpeechRecorder = () => {
               <div className="text-xs text-blue-600 dark:text-blue-400">
                 Words: {transcript.split(/\s+/).filter(word => word.length > 0).length} | 
                 Characters: {transcript.length}
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
+      {/* AI Feedback Display */}
+      {feedback && (
+        <Card className="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/20 dark:to-emerald-950/20 border-green-200 dark:border-green-800">
+          <CardContent className="p-6">
+            <div className="space-y-4">
+              <div className="flex items-center space-x-2">
+                <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
+                  <TrendingUp className="w-4 h-4 text-white" />
+                </div>
+                <h4 className="font-semibold text-green-700 dark:text-green-300">AI Speech Analysis</h4>
+              </div>
+              
+              <div className="space-y-4">
+                {feedback.map((item, index) => (
+                  <div key={index} className="bg-white/80 dark:bg-gray-800/80 rounded-lg p-4 border border-green-100 dark:border-green-700">
+                    <div className="flex items-center justify-between mb-2">
+                      <h5 className="font-medium text-gray-800 dark:text-gray-200">{item.category}</h5>
+                      <Badge 
+                        variant={item.score >= 7 ? "default" : item.score >= 5 ? "secondary" : "destructive"}
+                        className="text-xs"
+                      >
+                        {item.score}/10
+                      </Badge>
+                    </div>
+                    <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+                      {item.feedback}
+                    </p>
+                  </div>
+                ))}
               </div>
             </div>
           </CardContent>

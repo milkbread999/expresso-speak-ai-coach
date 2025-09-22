@@ -153,6 +153,92 @@ const Index = () => {
             </Button>
           </div>
         </section>
+
+        {/* Testimonials Section */}
+        <section className="space-y-8">
+          <div className="text-center space-y-2">
+            <h3 className="text-3xl font-bold text-foreground">What Our Users Say</h3>
+            <p className="text-muted-foreground">
+              Real feedback from people who've improved their speaking skills
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <Card className="shadow-medium border-0 bg-gradient-to-br from-card to-card/80 hover:shadow-large transition-all duration-300">
+              <CardContent className="p-6">
+                <div className="space-y-4">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-12 h-12 bg-gradient-hero rounded-full flex items-center justify-center text-white font-bold text-lg">
+                      S
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-foreground">Sydney</h4>
+                      <p className="text-sm text-muted-foreground">High School Student</p>
+                    </div>
+                  </div>
+                  <p className="text-muted-foreground leading-relaxed">
+                    "Expresso's work with our mock trial team was super helpful. The steps they provided for better speaking were specific and attainable, making it very easy to follow."
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="shadow-medium border-0 bg-gradient-to-br from-card to-card/80 hover:shadow-large transition-all duration-300">
+              <CardContent className="p-6">
+                <div className="space-y-4">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-12 h-12 bg-gradient-hero rounded-full flex items-center justify-center text-white font-bold text-lg">
+                      M
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-foreground">Abhi</h4>
+                      <p className="text-sm text-muted-foreground">Entrepreneur</p>
+                    </div>
+                  </div>
+                  <p className="text-muted-foreground leading-relaxed">
+                  "Working with Expresso has really helped me alleviate the pressure to be perfect that's often associated with public speaking and find my love for communication!”                  </p>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="shadow-medium border-0 bg-gradient-to-br from-card to-card/80 hover:shadow-large transition-all duration-300">
+              <CardContent className="p-6">
+                <div className="space-y-4">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-12 h-12 bg-gradient-hero rounded-full flex items-center justify-center text-white font-bold text-lg">
+                      A
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-foreground">Manav</h4>
+                      <p className="text-sm text-muted-foreground">IT Professional</p>
+                    </div>
+                  </div>
+                  <p className="text-muted-foreground leading-relaxed">
+                  "Expresso provided awesome coaching. It was really likeable way of teaching. I’m really grateful to connect with Expresso. Thanks for doing public speaking sessions!
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="shadow-medium border-0 bg-gradient-to-br from-card to-card/80 hover:shadow-large transition-all duration-300">
+              <CardContent className="p-6">
+                <div className="space-y-4">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-12 h-12 bg-gradient-hero rounded-full flex items-center justify-center text-white font-bold text-lg">
+                      E
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-foreground">Edden</h4>
+                      <p className="text-sm text-muted-foreground">High SchoolStudent</p>
+                    </div>
+                  </div>
+                  <p className="text-muted-foreground leading-relaxed">
+                  "Getting public speaking training has pushed me to think on my feet and speak confidently even if I feel unready."                  </p>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </section>
       </main>
 
       {/* Footer */}
