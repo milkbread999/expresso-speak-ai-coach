@@ -3,8 +3,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { SpeechRecorder } from "@/components/SpeechRecorder";
 import { DrillCard } from "@/components/DrillCard";
-import { Mic, Target, BookOpen, TrendingUp } from "lucide-react";
+import { Mic, Target, BookOpen, TrendingUp, ChevronLeft, ChevronRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 const featuredDrills = [
   {
@@ -94,7 +95,7 @@ const Index = () => {
 
         <div className="text-center">
             <Button 
-              onClick={() => navigate('/drills')}
+              onClick={() => window.open('https://calendly.com/speakexpresso/30min', '_blank')}
               size="lg"
               className="bg-gradient-hero hover:opacity-90 transition-opacity mr-4"
             >
