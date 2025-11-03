@@ -10,7 +10,7 @@ const firebaseConfig = {
   appId: import.meta.env.VITE_FIREBASE_APP_ID,
 };
 
-console.log("✅ Firebase API Key from .env:", import.meta.env.VITE_FIREBASE_API_KEY);
+// Avoid logging secrets or env values in production builds.
 
 
 const app = initializeApp(firebaseConfig);
