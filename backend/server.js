@@ -29,15 +29,16 @@ app.post('/api/speech-to-text-whisper', upload.single('audio'), async (req, res)
 
 app.post('/api/analyze-transcription', async (req, res) => {
     try {
-      const { transcription } = req.body;
+      const { transcription, drillId } = req.body;
   
       if (!transcription || typeof transcription !== 'string') {
         console.error("Invalid transcription:", transcription);
         return res.status(400).json({ error: 'Missing or invalid transcription' });
       }
       console.log("Transcription being sent to backend:", transcription);
+      console.log("Drill ID:", drillId);
 
-      const analysis = await analyzeTranscription(transcription);
+      const analysis = await analyzeTranscription(transcription, 'gpt-4', drillId);
       res.json({ analysis });
     } catch (error) {
       console.error('Error analyzing transcription:', error.message);

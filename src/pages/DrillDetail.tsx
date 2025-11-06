@@ -107,6 +107,212 @@ const drillsData = {
       "Builds pronunciation confidence",
       "Develops speech motor control"
     ]
+  },
+  4: {
+    id: 4,
+    title: "Breath Control",
+    description: "Master your breathing for sustained and powerful speech delivery",
+    difficulty: "Beginner",
+    duration: "8 min",
+    tags: ["Breathing", "Control"],
+    category: "Breathing",
+    instructions: [
+      "Sit or stand with your back straight and shoulders relaxed",
+      "Place one hand on your chest and the other on your abdomen",
+      "Inhale slowly through your nose for 4 counts, feeling your abdomen expand",
+      "Hold your breath for 4 counts",
+      "Exhale slowly through your mouth for 6 counts, feeling your abdomen contract",
+      "Repeat this cycle 10 times, focusing on smooth, controlled breathing"
+    ],
+    practiceText: "The ability to control your breath is fundamental to effective speaking. When you master breath control, you can speak longer sentences without running out of air, maintain consistent volume, and reduce vocal strain. Practice reading this passage while maintaining steady, controlled breathing throughout.",
+    tips: [
+      "Practice daily for best results",
+      "Don't force your breathing - keep it natural and relaxed",
+      "Focus on expanding your diaphragm, not just your chest",
+      "Use this technique before important speeches or presentations"
+    ],
+    benefits: [
+      "Increases speaking stamina",
+      "Reduces vocal fatigue",
+      "Improves volume control",
+      "Enhances overall speech quality"
+    ]
+  },
+  5: {
+    id: 5,
+    title: "Vocal Warm-ups",
+    description: "Prepare your voice with targeted exercises before speaking",
+    difficulty: "Beginner",
+    duration: "6 min",
+    tags: ["Warm-up", "Preparation"],
+    category: "Vocal Health",
+    instructions: [
+      "Start with gentle humming - hum 'mmm' on a comfortable pitch for 30 seconds",
+      "Practice lip trills - blow air through relaxed lips to create a 'brrr' sound",
+      "Do tongue stretches - stick your tongue out and move it in circles",
+      "Practice vowel sounds - say 'ah, eh, ee, oh, oo' slowly and clearly",
+      "End with gentle scales - sing 'do-re-mi-fa-sol-fa-mi-re-do' on a comfortable range"
+    ],
+    practiceText: "Vocal warm-ups are essential for maintaining vocal health and preparing your voice for extended speaking. Just as athletes warm up before exercise, speakers should warm up their vocal cords before presentations, meetings, or any extended speaking activity.",
+    tips: [
+      "Always warm up before important speaking engagements",
+      "Start gently and gradually increase intensity",
+      "Stop if you feel any strain or discomfort",
+      "Make warm-ups part of your daily routine"
+    ],
+    benefits: [
+      "Prevents vocal strain and injury",
+      "Improves vocal range and flexibility",
+      "Enhances voice quality and clarity",
+      "Increases speaking confidence"
+    ]
+  },
+  6: {
+    id: 6,
+    title: "Pitch Variation",
+    description: "Practice varying your vocal pitch for more engaging speech",
+    difficulty: "Intermediate",
+    duration: "9 min",
+    tags: ["Pitch", "Variation", "Engagement"],
+    category: "Expression",
+    instructions: [
+      "Read a sentence in a monotone voice (same pitch throughout)",
+      "Read the same sentence again, varying your pitch naturally",
+      "Practice emphasizing different words by changing pitch",
+      "Experiment with rising pitch for questions and falling pitch for statements",
+      "Record yourself and listen for natural pitch variation"
+    ],
+    practiceText: "The way you vary your pitch can make the difference between a captivating speech and a boring monologue. Pitch variation adds interest, emotion, and emphasis to your words. Practice reading this passage with natural pitch changes, emphasizing key words and phrases to convey meaning and emotion.",
+    tips: [
+      "Listen to skilled speakers and notice their pitch patterns",
+      "Use pitch to emphasize important points",
+      "Avoid monotone - it makes you sound disinterested",
+      "Practice with different emotional tones"
+    ],
+    benefits: [
+      "Makes speech more engaging and interesting",
+      "Helps convey emotion and meaning",
+      "Improves audience attention and retention",
+      "Develops vocal expressiveness"
+    ]
+  },
+  7: {
+    id: 7,
+    title: "Speed Control",
+    description: "Learn to control your speaking pace for maximum comprehension",
+    difficulty: "Intermediate",
+    duration: "7 min",
+    tags: ["Pace", "Control"],
+    category: "Delivery",
+    instructions: [
+      "Read a passage at your normal speaking pace",
+      "Read the same passage 20% slower, focusing on clarity",
+      "Practice pausing after key points or at punctuation marks",
+      "Read at a slightly faster pace while maintaining clarity",
+      "Find your optimal speaking speed - clear but not too slow"
+    ],
+    practiceText: "Effective speakers know how to control their pace. Speaking too fast can overwhelm your audience, while speaking too slowly can bore them. The key is finding the right balance - fast enough to maintain interest, slow enough to be understood. Practice varying your pace to emphasize important points and give your audience time to process information.",
+    tips: [
+      "Aim for 150-160 words per minute for most audiences",
+      "Slow down for complex or important information",
+      "Use pauses strategically to emphasize points",
+      "Practice with a metronome to develop consistent pacing"
+    ],
+    benefits: [
+      "Improves audience comprehension",
+      "Enhances speech clarity and impact",
+      "Allows time for emphasis on key points",
+      "Builds speaking confidence"
+    ]
+  },
+  8: {
+    id: 8,
+    title: "Consonant Clusters",
+    description: "Master difficult consonant combinations that trip up speakers",
+    difficulty: "Advanced",
+    duration: "12 min",
+    tags: ["Consonants", "Difficulty"],
+    category: "Articulation",
+    instructions: [
+      "Identify consonant clusters that are challenging for you",
+      "Practice each cluster in isolation, saying it slowly and clearly",
+      "Build up to saying the cluster in words",
+      "Practice the words in sentences",
+      "Repeat challenging clusters multiple times until they feel natural"
+    ],
+    practiceText: "Consonant clusters like 'str', 'spl', 'thr', and 'scr' can be particularly challenging. These combinations require precise tongue and lip placement. Practice saying words with difficult clusters: strength, splash, through, screen, three, split, thread, script. Focus on making each consonant sound clear and distinct.",
+    tips: [
+      "Break down clusters into individual sounds first",
+      "Practice in front of a mirror to see mouth movements",
+      "Start slow and gradually increase speed",
+      "Focus on tongue placement for each consonant"
+    ],
+    benefits: [
+      "Improves articulation precision",
+      "Reduces speech errors and stumbles",
+      "Enhances overall clarity",
+      "Builds confidence with difficult sounds"
+    ]
+  },
+  9: {
+    id: 9,
+    title: "Vowel Clarity",
+    description: "Perfect your vowel sounds for crystal-clear pronunciation",
+    difficulty: "Beginner",
+    duration: "6 min",
+    tags: ["Vowels", "Clarity"],
+    category: "Pronunciation",
+    instructions: [
+      "Practice each vowel sound individually: a, e, i, o, u",
+      "Say each vowel with your mouth open wide enough",
+      "Hold each vowel sound for 2-3 seconds",
+      "Practice vowel sounds in words, focusing on clarity",
+      "Read sentences emphasizing clear vowel pronunciation"
+    ],
+    practiceText: "Clear vowel sounds are essential for understandable speech. Vowels carry the melody of language and are crucial for comprehension. Practice reading this passage with special attention to making each vowel sound distinct and clear: 'The quick brown fox jumps over the lazy dog. A perfect example of clear vowel pronunciation.'",
+    tips: [
+      "Open your mouth wider than you think necessary",
+      "Practice in front of a mirror to see mouth shape",
+      "Focus on one vowel sound at a time",
+      "Record yourself to hear improvements"
+    ],
+    benefits: [
+      "Improves overall speech clarity",
+      "Makes speech more understandable",
+      "Enhances pronunciation accuracy",
+      "Builds foundation for advanced skills"
+    ]
+  },
+  10: {
+    id: 10,
+    title: "Public Speaking Prep",
+    description: "Prepare for presentations with confidence-building exercises",
+    difficulty: "Advanced",
+    duration: "15 min",
+    tags: ["Public Speaking", "Confidence"],
+    category: "Performance",
+    instructions: [
+      "Visualize yourself giving a successful presentation",
+      "Practice your opening line until it feels natural",
+      "Rehearse key transitions between main points",
+      "Practice your conclusion with confidence",
+      "Do a full run-through, including gestures and movement",
+      "Time yourself to ensure you stay within your limit"
+    ],
+    practiceText: "Public speaking requires preparation, practice, and confidence. Whether you're presenting to a small team or a large audience, thorough preparation is key to success. Practice your material until you know it well, but not so well that you sound robotic. Find the balance between preparation and natural delivery.",
+    tips: [
+      "Know your material thoroughly but don't memorize word-for-word",
+      "Practice in front of a mirror or record yourself",
+      "Prepare for potential questions from the audience",
+      "Arrive early to familiarize yourself with the space",
+      "Use breathing exercises to calm nerves before speaking"
+    ],
+    benefits: [
+      "Builds confidence for public speaking",
+      "Reduces anxiety and nervousness",
+      "Improves presentation delivery",
+      "Enhances audience engagement"
+    ]
   }
 };
 
@@ -303,7 +509,7 @@ const DrillDetail = () => {
                 </p>
               </CardHeader>
               <CardContent>
-                <SpeechRecorder />
+                <SpeechRecorder drillId={drill.id} />
               </CardContent>
             </Card>
           </div>

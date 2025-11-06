@@ -8,7 +8,11 @@ import { useToast } from "@/hooks/use-toast";
 
 type RecordingState = 'idle' | 'recording' | 'stopped' | 'analyzing';
 
-export const SpeechRecorder = () => {
+interface SpeechRecorderProps {
+  drillId?: number;
+}
+
+export const SpeechRecorder = ({ drillId }: SpeechRecorderProps = {}) => {
   const [recordingState, setRecordingState] = useState<RecordingState>('idle');
   const [duration, setDuration] = useState(0);
   const [audioURL, setAudioURL] = useState<string | null>(null);
@@ -137,7 +141,7 @@ export const SpeechRecorder = () => {
       const analysisRes = await fetch("http://localhost:5000/api/analyze-transcription", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ transcription }),
+        body: JSON.stringify({ transcription, drillId }),
       });
   
       console.log("Analysis response status:", analysisRes.status);

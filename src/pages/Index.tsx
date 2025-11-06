@@ -140,17 +140,9 @@ const Index = () => {
             <Button 
               onClick={() => navigate('/drills')}
               size="lg"
-              className="bg-gradient-hero hover:opacity-90 transition-opacity mr-4"
+              className="bg-gradient-hero hover:opacity-90 transition-opacity"
             >
               Explore All Drills
-            </Button>
-            <Button 
-              onClick={() => navigate('/training-plans')}
-              size="lg"
-              variant="outline"
-              className="hover:bg-primary hover:text-primary-foreground transition-colors"
-            >
-              Training Plans
             </Button>
           </div>
         </section>
@@ -230,7 +222,7 @@ const Index = () => {
                     </div>
                     <div>
                       <h4 className="font-semibold text-foreground">Edden</h4>
-                      <p className="text-sm text-muted-foreground">High SchoolStudent</p>
+                      <p className="text-sm text-muted-foreground">High School Student</p>
                     </div>
                   </div>
                   <p className="text-muted-foreground leading-relaxed">

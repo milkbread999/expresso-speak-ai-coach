@@ -3,7 +3,6 @@ import Index from "./pages/Index";
 import Drills from "./pages/Drills";
 import SignUp from "./pages/SignUp";
 import DrillDetail from "./pages/DrillDetail";
-import TrainingPlans from "./pages/TrainingPlans";
 import NotFound from "./pages/NotFound";
 import LogIn from "./pages/LogIn";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -21,21 +20,11 @@ const App = () => (
       <Sonner />
       <BrowserRouter basename={import.meta.env.BASE_URL}>
         <Routes>
-          <Route
-            path="/"
-            element={
-              <ProtectedRoute>
-                <Index />
-              </ProtectedRoute>
-            }
-          />
+          <Route path="/" element={<Index />} />
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/log-in" element={<LogIn />} />
           <Route path="/drills" element={              <ProtectedRoute>
                 <Drills />
-              </ProtectedRoute>} />
-          <Route path="/training-plans" element={              <ProtectedRoute>
-                <TrainingPlans />
               </ProtectedRoute>} />
           <Route path="/drill/:id" element={              <ProtectedRoute>
                 <DrillDetail />
