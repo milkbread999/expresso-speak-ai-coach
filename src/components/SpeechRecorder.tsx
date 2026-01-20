@@ -105,7 +105,8 @@ export const SpeechRecorder = ({ drillId }: SpeechRecorderProps = {}) => {
       setAnalysisProgress(25);
       console.log("Starting transcription...");
       
-      const transcriptionRes = await fetch("http://localhost:5000/api/speech-to-text-whisper", {
+      const apiBaseUrl = import.meta.env.VITE_API_URL || '';
+      const transcriptionRes = await fetch(`${apiBaseUrl}/api/speech-to-text-whisper`, {
         method: "POST",
         body: formData,
       });
@@ -138,7 +139,8 @@ export const SpeechRecorder = ({ drillId }: SpeechRecorderProps = {}) => {
       setAnalysisProgress(75);
       console.log("Starting analysis with transcription:", transcription);
       
-      const analysisRes = await fetch("http://localhost:5000/api/analyze-transcription", {
+      const apiBaseUrl = import.meta.env.VITE_API_URL || '';
+      const analysisRes = await fetch(`${apiBaseUrl}/api/analyze-transcription`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ transcription, drillId }),
